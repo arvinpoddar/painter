@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ComponentProps, ReactElement, useCallback, useMemo } from "react";
+import { useMemo } from "react";
 
 const difficulties = [
   { label: "Easy", value: 3 },

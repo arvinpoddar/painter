@@ -6,7 +6,7 @@ export default function App() {
   const [seed, setSeed] = useState(0);
 
   return (
-    <div className="w-screen h-screen bg-slate-200 flex items-center justify-center">
+    <div className="w-screen h-screen h-[calc(100dvh)] bg-slate-200 flex items-center justify-center">
       <Game
         key={seed}
         difficulty={difficulty}
