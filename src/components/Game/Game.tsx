@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Grid from "./components/Grid";
 import GridObjective from "./components/GridObjective";
 import MatchOverlay from "./components/MatchOverlay";
+import clsx from "clsx";
 
 const colors = [
   "bg-red-500",
@@ -43,9 +44,8 @@ function createRandomGridState(columnColors: string[], rowColors: string[]) {
     }
   }
 
-  for (let i = 0; i < 50; i++) {
-    const setRandomColumn = Math.random();
-    if (setRandomColumn < 0.5) {
+  for (let i = 0; i < 40; i++) {
+    if (i % 2 === 0) {
       applyColumnColor(Math.floor(Math.random() * width));
     } else {
       applyRowColor(Math.floor(Math.random() * height));
@@ -159,9 +159,15 @@ export function Game({ difficulty, onChangeDifficulty }: Props) {
         </div>
       </div>
 
-      {isMatch && (
-        <MatchOverlay moves={moves} onChangeDifficulty={onChangeDifficulty} />
-      )}
+      <MatchOverlay
+        difficulty={difficulty}
+        moves={moves}
+        onChangeDifficulty={onChangeDifficulty}
+        className={clsx(
+          isMatch ? "opacity-100" : "opacity-0 pointer-events-none",
+          "transition-all duration-1000"
+        )}
+      />
     </>
   );
 }

@@ -8,6 +8,9 @@ type Props = {
   onSetColumn: (column: number) => void;
 };
 
+const CELL_SIZING = "w-12 h-12";
+const CELL_GAP = "gap-2";
+
 export default function Grid({
   cells,
   rowColors,
@@ -18,15 +21,16 @@ export default function Grid({
   return (
     <div className="flex flex-col">
       <div className="flex">
-        <div className="flex flex-col gap-3">
+        <div className={clsx("flex flex-col", CELL_GAP)}>
           {cells.map((row, y) => (
-            <div key={y} className="flex gap-3">
+            <div key={y} className={clsx("flex", CELL_GAP)}>
               {row.map((color, x) => (
                 <div
                   key={`${y},${x}`}
                   className={clsx(
-                    "w-14 h-14 rounded transition-colors duration-500",
-                    color
+                    "rounded transition-colors duration-500",
+                    color,
+                    CELL_SIZING
                   )}
                 />
               ))}
@@ -35,13 +39,14 @@ export default function Grid({
         </div>
 
         {/* Row buttons */}
-        <div className="ml-6 flex flex-col gap-3">
+        <div className={clsx("ml-5 flex flex-col", CELL_GAP)}>
           {rowColors.map((color, idx) => (
             <button
               key={idx}
               className={clsx(
-                "w-14 h-14 rounded-full hover:brightness-90 transition duration-100 text-xl text-white",
-                color
+                "rounded-full hover:brightness-90 transition duration-100 text-xl text-white",
+                color,
+                CELL_SIZING
               )}
               onClick={() => {
                 onSetRow(idx);
@@ -54,13 +59,14 @@ export default function Grid({
       </div>
 
       {/* Column buttons */}
-      <div className="mt-6 flex gap-3">
+      <div className={clsx("mt-5 flex", CELL_GAP)}>
         {columnColors.map((color, idx) => (
           <button
             key={idx}
             className={clsx(
-              "w-14 h-14 rounded-full hover:brightness-90 transition duration-100 text-xl text-white",
-              color
+              "rounded-full hover:brightness-90 transition duration-100 text-xl text-white",
+              color,
+              CELL_SIZING
             )}
             onClick={() => {
               onSetColumn(idx);
